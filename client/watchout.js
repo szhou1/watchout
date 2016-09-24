@@ -19,19 +19,22 @@ var createEnemies = function() {
 
 var render = function(enemyData) {
 
-  var enemies = svg.selectAll('circle.enemy')
+  var enemies = svg.selectAll('image.enemy')
             .data(enemyData, function(enemy) { return enemy.id; });
 
-  enemies.enter().append('circle')
+  enemies.enter().append('image')
       .attr('class', 'enemy')
-      .attr('cx', function(enemy) { return enemy.x; })
-      .attr('cy', function(enemy) { return enemy.y; })
-      .attr('r', 10);
+      .attr('x', function(enemy) { return enemy.x; })
+      .attr('y', function(enemy) { return enemy.y; })
+      // .attr('x', 50)
+      // .attr('y', 50)
+      .attr('width', 20).attr('height', 20)
+      .attr('xlink:href', 'images/asteroid.png');
 
   enemies
     .transition().duration(750).ease('linear')
-    .attr('cx', function(enemy) { return enemy.x; } )
-    .attr('cy', function(enemy) { return enemy.y; } );
+    .attr('x', function(enemy) { return enemy.x; } )
+    .attr('y', function(enemy) { return enemy.y; } );
 };
 
 var play = function() {
@@ -80,8 +83,8 @@ var startCollisionCheck = function() {
 
     var enemies = svg.selectAll('.enemy');
     enemies[0].forEach(function(enemy) { 
-      var enemyX = Number(enemy.attributes.cx.value);
-      var enemyY = Number(enemy.attributes.cy.value);
+      var enemyX = Number(enemy.attributes.x.value);
+      var enemyY = Number(enemy.attributes.y.value);
 
       var distance = Math.sqrt(Math.pow(x - enemyX, 2) + Math.pow(y - enemyY, 2));
 
