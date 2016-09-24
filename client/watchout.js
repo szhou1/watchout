@@ -1,7 +1,11 @@
-var width = 100;
-var height = 150;
+var width = 900;
+var height = 750;
 var radius = 20;
-var enemyCount = 1;
+var enemyCount = 30;
+var currentScore = d3.select('.current > span')[0][0];
+var highScore = d3.select('.highscore > span')[0][0];
+var collisionCount = d3.select('.collisions > span')[0][0];
+var hadCollision = false;
 
 var createEnemies = function() {
   return d3.range(enemyCount).map(function(i) {
@@ -33,6 +37,7 @@ var render = function(enemyData) {
 var play = function() {
   
   var gameTurn = function() {
+    hadCollision = false;
     var newEnemyPositions = createEnemies();
     render(newEnemyPositions);
 
@@ -55,7 +60,7 @@ var drag = d3.behavior.drag()
     .on('drag', dragmove);
 
 var svg = d3.select('body').append('div').selectAll('svg')
-    .data(d3.range(1).map(function() { return {x: width / 2, y: height / 2}; }))
+    .data([{x: width / 2, y: height / 2}])
   .enter().append('svg')
     .attr('width', width)
     .attr('height', height);
@@ -80,14 +85,21 @@ var startCollisionCheck = function() {
 
       var distance = Math.sqrt(Math.pow(x - enemyX, 2) + Math.pow(y - enemyY, 2));
 
-      // console.log(distance);
       if (distance < 30) {
-        console.log("COLLISION");
+        if (Number(currentScore.innerHTML) > Number(highScore.innerHTML)) {
+          highScore.innerHTML = currentScore.innerHTML;
+        }
+        currentScore.innerHTML = 0;
+
+        if (!hadCollision) {
+          collisionCount.innerHTML++;
+          hadCollision = true;
+        }
+
       }
 
     });
 
-    // console.log(enemies);
   };
 
   setInterval(check, 100);
@@ -95,6 +107,15 @@ var startCollisionCheck = function() {
 
 startCollisionCheck();
 
+var startScoreCounter = function() {
+  var incrementScore = function() {
+    currentScore.innerHTML++;
+  };
+
+  setInterval(incrementScore, 1);
+};
+startScoreCounter();
+  
 console.log(player[0]);
 console.log(player[0][0].cy.baseVal.value);
 play();
