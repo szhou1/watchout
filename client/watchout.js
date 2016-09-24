@@ -1,5 +1,5 @@
-var width = 900;
-var height = 750;
+var width = window.innerWidth;
+var height = window.innerHeight;
 var radius = 20;
 var enemyCount = 30;
 var currentScore = d3.select('.current > span')[0][0];

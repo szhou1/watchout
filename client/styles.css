@@ -3,18 +3,25 @@
 /* Note: an asteroid image is included in this repo.
 Feel free to use it if you like. */
 
-svg {
-  background-image: url('images/bg.jpg')
-}
+body {
+  background-image: url('images/bg.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  
+/*  width: 900px; 
+  height: 900px;
+*/}
 
 .header {
   font-family: "gameText";
-    font-size: 250%;
+  font-size: 250%;
+  color: white;
 }
 
 .scoreboard {
   font-family: "gameText";
   width: 900px;
+  color: white;
 }
 
 .highscore {
