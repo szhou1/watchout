@@ -47,6 +47,8 @@ var play = function() {
 
   gameTurn();
   setInterval(gameTurn, 3100);
+  setTimeout(startScoreCounter, 3100);
+  setTimeout(startCollisionCheck, 3100);
 };
 
 var dragmove = function(d) {
@@ -121,16 +123,16 @@ var updateImage = function() {
   player.attr('xlink:href', 'images/xwing.png');
 };
 
-startCollisionCheck();
+
 
 var startScoreCounter = function() {
   var incrementScore = function() {
     currentScore.innerHTML++;
   };
 
-  setInterval(incrementScore, 1);
+  setInterval(incrementScore, 50);
 };
-startScoreCounter();
+
   
 // console.log(player[0]);
 // console.log(player[0][0].cy.baseVal.value);

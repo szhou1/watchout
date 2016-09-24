@@ -7,6 +7,36 @@ svg {
   background-image: url('images/bg.jpg')
 }
 
-.player {
-  background: url('images/asteroid.png');
+.header {
+  font-family: "gameText";
+    font-size: 250%;
+}
+
+.scoreboard {
+  font-family: "gameText";
+  width: 900px;
+}
+
+.highscore {
+  font-size: 120%;
+  float:left;
+  width:300px;
+}
+
+.current {
+  font-size: 120%;
+  float:left;
+  width:300px;
+}
+
+.collisions {
+  font-size: 120%;
+  float:left;
+  width:300px;
+}
+
+
+@font-face {
+  font-family: "gameText";
+  src: url(images/gameText.ttf) format("truetype");
 }
