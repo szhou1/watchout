@@ -52,8 +52,8 @@ var play = function() {
 
 var dragmove = function(d) {
   d3.select(this)
-      .attr('cx', d.x = Math.max(radius, Math.min(width - radius, d3.event.x)))
-      .attr('cy', d.y = Math.max(radius, Math.min(height - radius, d3.event.y)));
+      .attr('x', d.x = Math.max(radius, Math.min(width - radius, d3.event.x)))
+      .attr('y', d.y = Math.max(radius, Math.min(height - radius, d3.event.y)));
 
       
 };
@@ -68,18 +68,25 @@ var svg = d3.select('body').append('div').selectAll('svg')
     .attr('width', width)
     .attr('height', height);
 
-var player = svg.append('circle')
-    .attr('r', radius)
+// var player = svg.append('circle')
+//     .attr('r', radius)
+//     .attr('class', 'player')
+//     // .attr('fill', 'orange')
+//     .attr('cx', function(d) { return d.x; })
+//     .attr('cy', function(d) { return d.y; })
+//     .call(drag);
+var player = svg.append('image')
     .attr('class', 'player')
-    .attr('fill', 'orange')
-    .attr('cx', function(d) { return d.x; })
-    .attr('cy', function(d) { return d.y; })
+    .attr('x', function(d) { return d.x; })
+    .attr('y', function(d) { return d.y; })
+    .attr('width', 40).attr('height', 40)
+    .attr('xlink:href', 'images/xwing.png')
     .call(drag);
 
 var startCollisionCheck = function() {
   var check = function() {
-    var x = player[0][0].cx.baseVal.value;
-    var y = player[0][0].cy.baseVal.value;
+    var x = player[0][0].x.baseVal.value;
+    var y = player[0][0].y.baseVal.value;
 
     var enemies = svg.selectAll('.enemy');
     enemies[0].forEach(function(enemy) { 
@@ -119,8 +126,8 @@ var startScoreCounter = function() {
 };
 startScoreCounter();
   
-console.log(player[0]);
-console.log(player[0][0].cy.baseVal.value);
+// console.log(player[0]);
+// console.log(player[0][0].cy.baseVal.value);
 play();
 
 
