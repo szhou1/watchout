@@ -7,3 +7,6 @@ svg {
   background-image: url('images/bg.jpg')
 }
 
+.player {
+  background: url('images/asteroid.png');
+}

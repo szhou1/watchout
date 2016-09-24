@@ -32,7 +32,7 @@ var render = function(enemyData) {
       .attr('xlink:href', 'images/asteroid.png');
 
   enemies
-    .transition().duration(750).ease('linear')
+    .transition().duration(3000).ease('linear')
     .attr('x', function(enemy) { return enemy.x; } )
     .attr('y', function(enemy) { return enemy.y; } );
 };
@@ -40,14 +40,13 @@ var render = function(enemyData) {
 var play = function() {
   
   var gameTurn = function() {
-    hadCollision = false;
     var newEnemyPositions = createEnemies();
     render(newEnemyPositions);
 
   };
 
   gameTurn();
-  setInterval(gameTurn, 1000);
+  setInterval(gameTurn, 3100);
 };
 
 var dragmove = function(d) {
@@ -104,6 +103,8 @@ var startCollisionCheck = function() {
         if (!hadCollision) {
           collisionCount.innerHTML++;
           hadCollision = true;
+          player.attr('xlink:href', 'images/explosion.gif');
+          setTimeout(updateImage, 500);
         }
 
       }
@@ -113,6 +114,11 @@ var startCollisionCheck = function() {
   };
 
   setInterval(check, 100);
+};
+
+var updateImage = function() {
+  hadCollision = false;
+  player.attr('xlink:href', 'images/xwing.png');
 };
 
 startCollisionCheck();
